@@ -27,3 +27,12 @@ TASTYGO a été conçu comme un projet de développement web permettant de mettr
 - Consulter le détail d'une recette
 - Ajouter des recettes aux favoris
 - Gérer une liste de courses
+
+## Convention de nommage
+
+- Composants React : PascalCase → `RecipeCard.tsx`
+- Variables et fonctions : camelCase → `recipeName`, `getRecipes()`
+- Types et interfaces : PascalCase → `Recipe`, `RecipeProps`
+- Classes CSS : kebab-case → `.recipe-card`
+- Routes : kebab-case → `/toutes-les-recettes`
+- Constantes globales : UPPER_SNAKE_CASE → `API_URL`
