@@ -1,1 +1,18 @@
+body {
+	background-color: #ffeedd;
+}
 
+.recipe-grid {
+	display: grid;
+	grid-template-columns: repeat(5, 250px);
+	gap: 60px;
+	row-gap: 20px;
+	justify-content: center;
+}
+@media (max-width: 768px) {
+	.recipe-grid {
+		grid-template-columns: repeat(2, 200px);
+		gap: 28px;
+		justify-content: center;
+	}
+}
