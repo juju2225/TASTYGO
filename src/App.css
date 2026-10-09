@@ -2,6 +2,15 @@ body {
 	background-color: #ffeedd;
 }
 
+header {
+	background-color: #607441;
+	margin-bottom: 1rem;
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+	border-bottom: 4px solid #523249;
+}
+
 .recipe-grid {
 	display: grid;
 	grid-template-columns: repeat(5, 250px);

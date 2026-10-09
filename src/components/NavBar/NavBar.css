@@ -1,0 +1,141 @@
+nav {
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: center;
+	height: 15rem;
+	padding: 0 3rem;
+}
+
+nav .logo-tastygo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-self: start;
+}
+
+nav .logo-tastygo h2 {
+	color: #ffeedd;
+	margin: 0;
+	font-weight: 650;
+}
+
+nav ul {
+	display: flex;
+	align-items: center;
+	list-style: none;
+	gap: 1rem;
+	margin: 0;
+	padding: 0;
+	justify-self: end;
+}
+
+nav img {
+	width: 7rem;
+}
+
+.logo-spin {
+	animation: spin-logo 0.8s ease-in-out;
+}
+
+@keyframes spin-logo {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+nav input {
+	width: 30rem;
+	height: 3.2rem;
+	padding: 0 1.2rem;
+	border: 2px solid transparent;
+	border-radius: 12px;
+	outline: none;
+	font-size: 1rem;
+	justify-self: center;
+	transition:
+		border-color 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+nav input:hover,
+nav input:focus {
+	border-color: #523249;
+	box-shadow: 0 0 0 3px rgba(82, 50, 73, 0.15);
+}
+
+nav .btn-primary {
+	background-color: #b83d2b;
+	border-color: #b83d2b;
+	color: #ffeedd;
+	font-weight: 550;
+	font-size: 1.1rem;
+	padding: 0.7rem 1.2rem;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(82, 50, 73, 0.3);
+	transition:
+		background-color 0.2s ease,
+		border-color 0.2s ease,
+		box-shadow 0.2s ease,
+		transform 0.2s ease;
+}
+
+nav .btn-primary:hover {
+	background-color: #523249;
+	border-color: #523249;
+	color: #ffeedd;
+	box-shadow: 0 6px 12px rgba(82, 50, 73, 0.4);
+	transform: translateY(-2px);
+}
+
+nav .btn-primary:active,
+nav .btn-primary:focus,
+nav .btn-primary:focus-visible {
+	background-color: #523249 !important;
+	border-color: #523249 !important;
+	color: #ffeedd !important;
+	box-shadow: 0 6px 12px rgba(82, 50, 73, 0.4) !important;
+}
+
+nav .btn-primary:active:focus {
+	background-color: #523249 !important;
+	border-color: #523249 !important;
+	color: #ffeedd !important;
+}
+
+@media (max-width: 768px) {
+	nav {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-around;
+		height: auto;
+		padding: 1.5rem 1rem;
+		gap: 1.5rem;
+	}
+
+	nav input {
+		order: 3;
+		width: 90%;
+		max-width: 25rem;
+	}
+
+	nav ul {
+		order: 2;
+	}
+
+	nav .ul-links ul {
+		display: flex;
+		justify-content: center;
+		gap: 0.7rem;
+		padding: 0;
+		margin: 0;
+	}
+
+	nav .btn-primary {
+		font-size: 0.95rem;
+		padding: 0.6rem 0.9rem;
+	}
+}
