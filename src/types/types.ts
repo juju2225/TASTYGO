@@ -4,7 +4,7 @@ export type GetRecipes = (letter: string) => Promise<{ meals: Recipe[] }>;
 
 export type RecipesRequest = ReturnType<GetRecipes>[];
 
-export type GetAllRecipes = ():Promise<Recipe[]>; 
+export type GetAllRecipes = () => Promise<Recipe[]>;
 
 export type Recipe = {
 	dateModified: string | null;
@@ -74,8 +74,14 @@ export type Countries = {
 
 export type RecipeCards = {
 	recipe: Recipe;
-	flag: {
-		country:string;
-		flag: string;
-	} | undefined;
-}
+	flag:
+		| {
+				country: string;
+				flag: string;
+		  }
+		| undefined;
+};
+
+export type NavBarProps = {
+	recipeUser: (val: string) => void;
+};

@@ -1,8 +1,9 @@
 import { Link } from "react-router";
 import logo from "../../assets/logo/logo-tastygo.svg";
 import "./Navbar.css";
+import type { NavBarProps } from "../../types/types";
 
-function NavBar({ recipeUser }) {
+function NavBar({ recipeUser }: NavBarProps) {
 	return (
 		<nav>
 			<div className="logo-tastygo">

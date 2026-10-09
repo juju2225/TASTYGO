@@ -4,8 +4,8 @@ import countries from "./data/countries";
 import getAllRecipes from "./services/recipeService";
 import type { Recipe } from "./types/types";
 import "./App.css";
-import NavBar from "./components/NavBar/NavBar";
 import { Route, Routes, useNavigate } from "react-router";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
 	const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -17,7 +17,7 @@ function App() {
 
 	const [search, setSearch] = useState("");
 	const way = useNavigate();
-	function inputValue(valInput) {
+	function inputValue(valInput: string) {
 		setSearch(valInput);
 		way("/all-recipes");
 	}
