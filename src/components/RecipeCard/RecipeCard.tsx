@@ -1,8 +1,8 @@
+import { Link } from "react-router";
 import type { RecipeCards } from "../../types/types";
 import "./RecipeCard.css";
 
 function RecipeCard({ recipe, flag }: RecipeCards) {
-	console.log(recipe);
 	return (
 		<article className="card recipe-card">
 			<img
@@ -14,9 +14,9 @@ function RecipeCard({ recipe, flag }: RecipeCards) {
 				<p className="card-text">{flag?.flag}</p>
 				<p className="card-text-2">{flag?.country}</p>
 				<h5 className="card-title">{recipe.strMeal}</h5>
-				<button type="button" className="btn btn-primary">
-					Recette 🔪
-				</button>
+				<Link to={`/recipe/${recipe.idMeal}`} className="btn btn-primary">
+					Recipe 🔪
+				</Link>
 				<button
 					type="button"
 					className="favorite-button"

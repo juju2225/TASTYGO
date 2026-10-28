@@ -6,6 +6,7 @@ import type { Recipe } from "./types/types";
 import "./App.css";
 import { Route, Routes, useNavigate } from "react-router";
 import NavBar from "./components/NavBar/NavBar";
+import RecipeDetails from "./components/RecipeCard/RecipeDetails";
 
 function App() {
 	const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -62,6 +63,7 @@ function App() {
 				<Route path="/discover" element={<h1>Hello from discover</h1>} />
 				<Route path="/favorites" element={<h1>hello from favorites</h1>} />
 				<Route path="/my-list" element={<h1>hello from my-list</h1>} />
+				<Route path="/recipe/:idMeal" element={<RecipeDetails />} />
 			</Routes>
 		</>
 	);

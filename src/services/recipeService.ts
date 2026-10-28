@@ -52,4 +52,16 @@ function getAllRecipes(): Promise<Recipe[]> {
 	});
 }
 
+type RecipeIdResponse = {
+	meals: Recipe[] | null;
+};
+
+export function getRecipeId(id: string): Promise<Recipe[]> {
+	return fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
+		.then((response) => response.json() as Promise<RecipeIdResponse>)
+		.then((data) => {
+			return data.meals ?? [];
+		});
+}
+
 export default getAllRecipes;
