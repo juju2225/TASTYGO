@@ -85,3 +85,21 @@ export type RecipeCards = {
 export type NavBarProps = {
 	recipeUser: (val: string) => void;
 };
+
+export type checkBoxFilterProps = {
+	checkBoxFilter: (valBox: string) => void;
+	selectedCountry: string[];
+	resetCountries: () => void;
+
+	checkBoxDishes: (valDish: string) => void;
+	selectedDishes: string[];
+	resetDishes: () => void;
+
+	checkBoxDesserts: (valDessert: string) => void;
+	selectedDesserts: string[];
+	resetDesserts: () => void;
+
+	checkBoxAllergens: (valAllergen: string) => void;
+	selectedAllergens: string[];
+	resetAllergens: () => void;
+};
