@@ -192,6 +192,9 @@ main .meal-details img {
 }
 
 main > section.recipe-instructions {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
 	min-height: clamp(10rem, 25vw, 18rem);
 	margin: 0 clamp(0.25rem, 4vw, 3rem) clamp(2rem, 4vw, 3rem);
 	padding: clamp(1.25rem, 5vw, 3.5rem);

@@ -1,0 +1,116 @@
+.recipe-filter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin: 1.5rem auto;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.filter-buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 6rem;
+}
+
+.filter-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: fit-content;
+}
+
+.filter-button {
+	padding: 0.8rem 1.5rem;
+	background-color: #b83d2b;
+	color: #ffeedd;
+	border: 1px solid #b83d2b;
+	border-radius: 8px;
+	font-family: inherit;
+	font-size: 1.05rem;
+	font-weight: 550;
+	cursor: pointer;
+	box-shadow: 0 4px 8px rgba(82, 50, 73, 0.3);
+	transition:
+		background-color 0.2s ease,
+		border-color 0.2s ease,
+		box-shadow 0.2s ease,
+		transform 0.2s ease;
+}
+
+.filter-button:hover {
+	background-color: #523249;
+	border-color: #523249;
+	color: #ffeedd;
+	box-shadow: 0 6px 12px rgba(82, 50, 73, 0.4);
+	transform: translateY(-2px);
+}
+
+.filter-button:active,
+.filter-button:focus,
+.filter-button:focus-visible {
+	background-color: #523249;
+	border-color: #523249;
+	color: #ffeedd;
+	box-shadow: 0 6px 12px rgba(82, 50, 73, 0.4);
+}
+
+.countries-menu {
+	position: static;
+	transform: none;
+	display: block;
+	width: 250px;
+	max-height: 250px;
+	overflow-y: auto;
+	margin-top: 0.5rem;
+	background-color: #ffeedd;
+	color: #523249;
+	border: 1px solid #523249;
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(82, 50, 73, 0.3);
+}
+
+.countries-menu .dropdown-item {
+	background-color: #ffeedd;
+	color: #523249;
+}
+
+.countries-menu .dropdown-item:hover {
+	background-color: #f5dfcf;
+	color: #523249;
+}
+
+.countries-menu input[type="checkbox"] {
+	margin-right: 10px;
+	accent-color: #523249;
+}
+
+@media (max-width: 768px) {
+	.filter-buttons {
+		gap: 1rem;
+	}
+
+	.filter-button {
+		padding: 0.7rem 1rem;
+		font-size: 0.95rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.filter-buttons {
+		display: grid;
+		grid-template-columns: repeat(2, max-content);
+		justify-content: center;
+		align-items: start;
+		gap: 1rem;
+	}
+
+	.filter-button {
+		min-width: 8.5rem;
+		padding: 0.7rem 1rem;
+		font-size: 0.9rem;
+	}
+}

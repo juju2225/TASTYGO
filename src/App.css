@@ -19,6 +19,27 @@ header {
 	justify-content: center;
 }
 
+.no-recipes {
+	text-align: center;
+	margin: 4rem auto;
+	font-size: 1.3rem;
+	font-weight: 500;
+	color: #523249;
+}
+
+.all-recipes-title {
+	text-align: center;
+	color: #523249;
+	font-family: "Poppins", sans-serif;
+	font-size: clamp(2rem, 4vw, 3.5rem);
+	font-weight: 800;
+	line-height: 1.2;
+	letter-spacing: 0.03em;
+	text-shadow: 2px 3px 5px rgba(82, 50, 73, 0.25);
+	margin: 2rem auto 2.5rem;
+	padding: 0 1rem;
+}
+
 @media (min-width: 1201px) and (max-width: 1440px) {
 	.recipe-grid {
 		grid-template-columns: repeat(4, minmax(0, 1fr));

@@ -1,64 +1,220 @@
 import { useEffect, useState } from "react";
+import { Route, Routes, useNavigate } from "react-router";
 import RecipeCard from "./components/RecipeCard/RecipeCard";
 import countries from "./data/countries";
 import getAllRecipes from "./services/recipeService";
 import type { Recipe } from "./types/types";
 import "./App.css";
-import { Route, Routes, useNavigate } from "react-router";
 import NavBar from "./components/NavBar/NavBar";
 import RecipeDetails from "./components/RecipeCard/RecipeDetails";
+import RecipeFilter from "./components/RecipeFilter/RecipeFilter";
+import desserts from "./data/desserts";
+import allergens from "./data/allergens";
 
 function App() {
 	const [recipes, setRecipes] = useState<Recipe[]>([]);
+	const [loading, setLoading] = useState(true);
+	const [search, setSearch] = useState("");
+	const [selectedCountry, setSelectedCountry] = useState<string[]>([]);
+	const [selectedDishes, setSelectedDishes] = useState<string[]>([]);
+	const [selectedDesserts, setSelectedDesserts] = useState<string[]>([]);
+	const [selectedAllergens, setSelectedAllergens] = useState<string[]>([]);
+
+	const way = useNavigate();
+
 	useEffect(() => {
-		getAllRecipes().then((data) => {
-			setRecipes(data);
-		});
+		getAllRecipes()
+			.then((data) => {
+				setRecipes(data);
+			})
+			.finally(() => {
+				setLoading(false);
+			});
 	}, []);
 
-	const [search, setSearch] = useState("");
-	const way = useNavigate();
 	function inputValue(valInput: string) {
 		setSearch(valInput);
 		way("/all-recipes");
 	}
+
+	function checkboxValue(valBox: string) {
+		if (selectedCountry.includes(valBox)) {
+			setSelectedCountry(
+				selectedCountry.filter((country) => country !== valBox),
+			);
+		} else {
+			setSelectedCountry([...selectedCountry, valBox]);
+		}
+
+		way("/all-recipes");
+	}
+
+	function resetCountries() {
+		setSelectedCountry([]);
+	}
+
+	function checkboxDishes(valDish: string) {
+		if (selectedDishes.includes(valDish)) {
+			setSelectedDishes(selectedDishes.filter((dish) => dish !== valDish));
+		} else {
+			setSelectedDishes([...selectedDishes, valDish]);
+		}
+
+		way("/all-recipes");
+	}
+
+	function resetDishes() {
+		setSelectedDishes([]);
+	}
+
+	function checkboxDesserts(valDessert: string) {
+		if (selectedDesserts.includes(valDessert)) {
+			setSelectedDesserts(
+				selectedDesserts.filter((dessert) => dessert !== valDessert),
+			);
+		} else {
+			setSelectedDesserts([...selectedDesserts, valDessert]);
+		}
+
+		way("/all-recipes");
+	}
+
+	function resetDesserts() {
+		setSelectedDesserts([]);
+	}
+
+	function checkBoxAllergens(valAllergen: string) {
+		if (selectedAllergens.includes(valAllergen)) {
+			setSelectedAllergens(
+				selectedAllergens.filter((allergen) => allergen !== valAllergen),
+			);
+		} else {
+			setSelectedAllergens([...selectedAllergens, valAllergen]);
+		}
+
+		way("/all-recipes");
+	}
+
+	function resetAllergens() {
+		setSelectedAllergens([]);
+	}
+
+	function getIngredients(recipe: Recipe): string[] {
+		return Array.from({ length: 20 }, (_, index) => {
+			const key = `strIngredient${index + 1}` as keyof Recipe;
+
+			return String(recipe[key] ?? "")
+				.toLowerCase()
+				.trim();
+		});
+	}
+
+	const activeAllergens = allergens.filter((allergen) =>
+		selectedAllergens.includes(allergen.name),
+	);
+
+	const filteredRecipes = recipes.filter((recipe) => {
+		const matchesSearch =
+			recipe.strMeal.toLowerCase().includes(search.toLowerCase()) ||
+			recipe.strCountry.toLowerCase().includes(search.toLowerCase());
+
+		const matchesCountry =
+			selectedCountry.length === 0 ||
+			selectedCountry.includes(recipe.strCountry);
+
+		const matchesDishes =
+			selectedDishes.length === 0 ||
+			selectedDishes.includes(recipe.strCategory);
+
+		const ingredients = getIngredients(recipe);
+
+		let matchesDesserts = true;
+
+		if (selectedDesserts.length > 0) {
+			matchesDesserts =
+				recipe.strCategory === "Dessert" &&
+				desserts.some((dessert) => {
+					return (
+						selectedDesserts.includes(dessert.name) &&
+						ingredients.some((ingredient) =>
+							dessert.ingredients.some((keyword) =>
+								ingredient.includes(keyword.toLowerCase()),
+							),
+						)
+					);
+				});
+		}
+
+		const matchesAllergens = activeAllergens.every(
+			(allergen) =>
+				!ingredients.some((ingredient) =>
+					allergen.ingredients.some((keyword) =>
+						ingredient.includes(keyword.toLowerCase()),
+					),
+				),
+		);
+
+		return (
+			matchesSearch &&
+			matchesCountry &&
+			matchesDishes &&
+			matchesDesserts &&
+			matchesAllergens
+		);
+	});
 
 	return (
 		<>
 			<header>
 				<NavBar recipeUser={inputValue} />
 			</header>
+
 			<Routes>
 				<Route
 					path="/all-recipes"
 					element={
-						<div className="recipe-grid">
-							{recipes
-								.filter((recipe) => {
-									return (
-										recipe.strMeal
-											.toLowerCase()
-											.includes(search.toLowerCase()) ||
-										recipe.strCountry
-											.toLowerCase()
-											.includes(search.toLowerCase())
-									);
-								})
-								.map((recipe) => {
-									const flags = countries.find((country) => {
-										return country.country === recipe.strCountry;
-									});
-									return (
-										<RecipeCard
-											key={recipe.idMeal}
-											recipe={recipe}
-											flag={flags}
-										/>
-									);
-								})}
-						</div>
+						<>
+							<h1 className="all-recipes-title">All recipes</h1>
+							<RecipeFilter
+								checkBoxFilter={checkboxValue}
+								selectedCountry={selectedCountry}
+								resetCountries={resetCountries}
+								checkBoxDishes={checkboxDishes}
+								selectedDishes={selectedDishes}
+								resetDishes={resetDishes}
+								checkBoxDesserts={checkboxDesserts}
+								selectedDesserts={selectedDesserts}
+								resetDesserts={resetDesserts}
+								checkBoxAllergens={checkBoxAllergens}
+								selectedAllergens={selectedAllergens}
+								resetAllergens={resetAllergens}
+							/>
+
+							{loading ? (
+								<p className="no-recipes">Loading recipes...</p>
+							) : filteredRecipes.length === 0 ? (
+								<p className="no-recipes">No recipes available</p>
+							) : (
+								<div className="recipe-grid">
+									{filteredRecipes.map((recipe) => {
+										const flags = countries.find(
+											(country) => country.country === recipe.strCountry,
+										);
+
+										return (
+											<RecipeCard
+												key={recipe.idMeal}
+												recipe={recipe}
+												flag={flags}
+											/>
+										);
+									})}
+								</div>
+							)}
+						</>
 					}
 				/>
+
 				<Route path="/home" element={<h1>Hello from home</h1>} />
 				<Route path="/discover" element={<h1>Hello from discover</h1>} />
 				<Route path="/favorites" element={<h1>hello from favorites</h1>} />

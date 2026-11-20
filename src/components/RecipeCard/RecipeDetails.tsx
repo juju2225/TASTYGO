@@ -17,7 +17,7 @@ function RecipeDetails() {
 	useEffect(() => {
 		if (idMeal) {
 			getRecipeId(idMeal).then((data) => {
-				setIdRecipe(data[0]);
+				setIdRecipe(data[0] ?? null);
 			});
 		}
 	}, [idMeal]);
