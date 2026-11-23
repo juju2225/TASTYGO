@@ -1,0 +1,118 @@
+section.quote-section {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin: 0 0 2rem;
+	padding: 0 1rem;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
+}
+
+.quote-heading {
+	width: 100%;
+	margin: 0;
+	padding: 0 0 0.25rem 0.5rem;
+	border-bottom: 1px solid #523249;
+	color: #523249;
+	font-family: "Poppins", sans-serif;
+	font-size: clamp(1rem, 1.5vw, 1.2rem);
+	font-weight: 500;
+	line-height: 1.4;
+	box-sizing: border-box;
+}
+
+.quote-content {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 1.5rem;
+	width: 100%;
+	padding: 1rem 0.5rem 0;
+	box-sizing: border-box;
+}
+
+.quote-content blockquote {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	color: #523249;
+	font-family: "Poppins", sans-serif;
+	font-size: clamp(1.3rem, 2.2vw, 2rem);
+	font-weight: 600;
+	font-style: italic;
+	line-height: 1.5;
+	text-align: center;
+	overflow-wrap: break-word;
+}
+
+.quote-author {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	color: #523249;
+	font-family: "Poppins", sans-serif;
+	font-size: clamp(1rem, 1.5vw, 1.3rem);
+	font-weight: 500;
+	text-align: center;
+}
+
+@media (max-width: 768px) {
+	.home-title {
+		font-size: 2rem;
+		margin: 1.5rem auto 2rem;
+	}
+
+	section.quote-section {
+		margin-bottom: 2.5rem;
+		padding: 0 0.75rem;
+	}
+
+	.quote-heading {
+		font-size: 1rem;
+		padding-left: 0.25rem;
+	}
+
+	.quote-content {
+		gap: 1.5rem;
+		padding: 1rem 0.75rem 0;
+	}
+
+	.quote-content blockquote {
+		font-size: clamp(1.2rem, 4vw, 1.6rem);
+		line-height: 1.5;
+	}
+
+	.quote-author {
+		font-size: 1.1rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.home-title {
+		font-size: 1.8rem;
+		margin: 1.25rem auto 1.75rem;
+	}
+
+	section.quote-section {
+		padding: 0 0.5rem;
+		margin-bottom: 2rem;
+	}
+
+	.quote-heading {
+		font-size: 0.95rem;
+	}
+
+	.quote-content {
+		gap: 1.25rem;
+		padding: 0.75rem 0.75rem 0;
+	}
+
+	.quote-content blockquote {
+		font-size: clamp(1.1rem, 4.5vw, 1.4rem);
+		line-height: 1.5;
+	}
+
+	.quote-author {
+		font-size: 1rem;
+	}
+}
