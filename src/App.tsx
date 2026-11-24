@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router";
+import { useState } from "react";
+import { Route, Routes, Navigate, useNavigate } from "react-router";
 import RecipeCard from "./components/RecipeCard/RecipeCard";
 import countries from "./data/countries";
-import getAllRecipes from "./services/recipeService";
 import type { Recipe } from "./types/types";
 import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
@@ -10,10 +9,14 @@ import RecipeDetails from "./components/RecipeCard/RecipeDetails";
 import RecipeFilter from "./components/RecipeFilter/RecipeFilter";
 import desserts from "./data/desserts";
 import allergens from "./data/allergens";
+import Home from "./components/Home/Home";
+import { useRecipes } from "./contexts/RecipesContext";
+import Footer from "./components/footer/Footer";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 function App() {
-	const [recipes, setRecipes] = useState<Recipe[]>([]);
-	const [loading, setLoading] = useState(true);
+	const { recipes, loading, error } = useRecipes();
+
 	const [search, setSearch] = useState("");
 	const [selectedCountry, setSelectedCountry] = useState<string[]>([]);
 	const [selectedDishes, setSelectedDishes] = useState<string[]>([]);
@@ -21,16 +24,6 @@ function App() {
 	const [selectedAllergens, setSelectedAllergens] = useState<string[]>([]);
 
 	const way = useNavigate();
-
-	useEffect(() => {
-		getAllRecipes()
-			.then((data) => {
-				setRecipes(data);
-			})
-			.finally(() => {
-				setLoading(false);
-			});
-	}, []);
 
 	function inputValue(valInput: string) {
 		setSearch(valInput);
@@ -167,14 +160,20 @@ function App() {
 		<>
 			<header>
 				<NavBar recipeUser={inputValue} />
+				<ScrollToTop />
 			</header>
 
 			<Routes>
+				<Route path="/" element={<Navigate to="/home" replace />} />
+
+				<Route path="/home" element={<Home />} />
+
 				<Route
 					path="/all-recipes"
 					element={
 						<>
 							<h1 className="all-recipes-title">All recipes</h1>
+
 							<RecipeFilter
 								checkBoxFilter={checkboxValue}
 								selectedCountry={selectedCountry}
@@ -192,6 +191,8 @@ function App() {
 
 							{loading ? (
 								<p className="no-recipes">Loading recipes...</p>
+							) : error ? (
+								<p className="no-recipes">{error}</p>
 							) : filteredRecipes.length === 0 ? (
 								<p className="no-recipes">No recipes available</p>
 							) : (
@@ -215,12 +216,17 @@ function App() {
 					}
 				/>
 
-				<Route path="/home" element={<h1>Hello from home</h1>} />
 				<Route path="/discover" element={<h1>Hello from discover</h1>} />
+
 				<Route path="/favorites" element={<h1>hello from favorites</h1>} />
+
 				<Route path="/my-list" element={<h1>hello from my-list</h1>} />
+
 				<Route path="/recipe/:idMeal" element={<RecipeDetails />} />
 			</Routes>
+			<footer>
+				<Footer />
+			</footer>
 		</>
 	);
 }

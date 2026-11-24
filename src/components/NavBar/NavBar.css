@@ -14,19 +14,6 @@ nav .logo-tastygo {
 	justify-self: start;
 }
 
-.logo-spin {
-	animation: spin-logo 0.8s ease-in-out;
-}
-
-@keyframes spin-logo {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
-}
-
 nav .logo-tastygo h2 {
 	color: #ffeedd;
 	margin: 0;
