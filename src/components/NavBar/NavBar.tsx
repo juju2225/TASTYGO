@@ -2,8 +2,11 @@ import { Link } from "react-router";
 import logo from "../../assets/logo/logo-tastygo.svg";
 import "./Navbar.css";
 import type { NavBarProps } from "../../types/types";
+import { useRecipes } from "../../contexts/RecipesContext";
 
 function NavBar({ recipeUser }: NavBarProps) {
+	const { favorites } = useRecipes();
+
 	return (
 		<nav>
 			<div className="logo-tastygo">
@@ -20,6 +23,7 @@ function NavBar({ recipeUser }: NavBarProps) {
 				</Link>
 				<h2>TASTYGO</h2>
 			</div>
+
 			<input
 				type="text"
 				placeholder="Search"
@@ -27,18 +31,35 @@ function NavBar({ recipeUser }: NavBarProps) {
 					recipeUser(event.target.value);
 				}}
 			/>
+
 			<div className="ul-links">
 				<ul>
 					<li>
-						<Link to={"/favorites"} className="btn btn-primary">
-							Favorite
+						<Link
+							to={"/favorites"}
+							className="btn btn-primary position-relative"
+						>
+							Favorites
+							{favorites.length > 0 && (
+								<span
+									className="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+									style={{
+										backgroundColor: "#523249",
+										color: "#ffeedd",
+									}}
+								>
+									{favorites.length}
+								</span>
+							)}
 						</Link>
 					</li>
+
 					<li>
 						<Link to={"/discover"} className="btn btn-primary">
 							Discover
 						</Link>
 					</li>
+
 					<li>
 						<Link to={"/my-list"} className="btn btn-primary">
 							My List

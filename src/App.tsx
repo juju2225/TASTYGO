@@ -13,6 +13,7 @@ import Home from "./components/Home/Home";
 import { useRecipes } from "./contexts/RecipesContext";
 import Footer from "./components/footer/Footer";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import Favorites from "./components/Favorites/Favorites";
 
 function App() {
 	const { recipes, loading, error } = useRecipes();
@@ -171,7 +172,7 @@ function App() {
 				<Route
 					path="/all-recipes"
 					element={
-						<>
+						<main className="all-recipes-page">
 							<h1 className="all-recipes-title">All recipes</h1>
 
 							<RecipeFilter
@@ -212,13 +213,13 @@ function App() {
 									})}
 								</div>
 							)}
-						</>
+						</main>
 					}
 				/>
 
 				<Route path="/discover" element={<h1>Hello from discover</h1>} />
 
-				<Route path="/favorites" element={<h1>hello from favorites</h1>} />
+				<Route path="/favorites" element={<Favorites />} />
 
 				<Route path="/my-list" element={<h1>hello from my-list</h1>} />
 

@@ -34,26 +34,18 @@
 	align-items: center;
 	min-width: 0;
 	box-sizing: border-box;
-	padding: 0 1rem 0.5rem;
-}
-
-.recipe-card .card-text {
-	font-size: 2.5rem;
-	margin-bottom: 0;
-}
-
-.recipe-card .card-text-2 {
-	font-size: 1rem;
-	color: #ffeedd;
+	padding: 1rem 1rem 0.5rem;
 }
 
 .recipe-card .card-title {
+	width: 100%;
 	color: #ffeedd;
 	font-weight: 600;
 	font-size: 1.2rem;
 	height: 93px;
 	overflow: hidden;
 	margin-bottom: 0.7rem;
+	text-align: center;
 }
 
 .recipe-card .btn-primary {
@@ -100,8 +92,9 @@
 }
 
 .recipe-card .favorite-button .bi {
-	color: #b83d2b;
+	color: #ffeedd;
 	font-size: 1.8rem;
+	transition: color 0.2s ease;
 }
 
 .recipe-card .favorite-button:hover {
@@ -115,15 +108,7 @@
 	}
 
 	.recipe-card .card-body {
-		padding: 0.5rem 0.8rem 0.4rem;
-	}
-
-	.recipe-card .card-text {
-		font-size: clamp(1.5rem, 2.5vw, 2rem);
-	}
-
-	.recipe-card .card-text-2 {
-		font-size: clamp(0.8rem, 1.2vw, 1rem);
+		padding: 0.8rem 0.8rem 0.4rem;
 	}
 
 	.recipe-card .card-title {
@@ -149,15 +134,7 @@
 	}
 
 	.recipe-card .card-body {
-		padding: 0.4rem 0.7rem 0.3rem;
-	}
-
-	.recipe-card .card-text {
-		font-size: clamp(1.5rem, 5vw, 2rem);
-	}
-
-	.recipe-card .card-text-2 {
-		font-size: clamp(0.8rem, 2.5vw, 1rem);
+		padding: 0.7rem 0.7rem 0.3rem;
 	}
 
 	.recipe-card .card-title {
@@ -179,15 +156,13 @@
 
 @media (max-width: 380px) {
 	.recipe-card .card-body {
-		padding: 0.3rem 0.5rem 0.2rem;
+		padding: 0.6rem 0.5rem 0.2rem;
 	}
 
-	@media (max-width: 380px) {
-		.recipe-card .card-title {
-			font-size: 0.75rem;
-			height: 70px;
-			margin-bottom: 0.6rem;
-		}
+	.recipe-card .card-title {
+		font-size: 0.75rem;
+		height: 70px;
+		margin-bottom: 0.6rem;
 	}
 
 	.recipe-card .btn-primary {

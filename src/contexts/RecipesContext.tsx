@@ -7,6 +7,9 @@ interface RecipesContextType {
 	recipes: Recipe[];
 	loading: boolean;
 	error: string | null;
+	favorites: string[];
+	toggleFavorite: (idMeal: string) => void;
+	isFavorite: (idMeal: string) => boolean;
 }
 
 const RecipesContext = createContext<RecipesContextType | undefined>(undefined);
@@ -19,6 +22,12 @@ export function RecipesProvider({ children }: RecipesProviderProps) {
 	const [recipes, setRecipes] = useState<Recipe[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
+
+	const [favorites, setFavorites] = useState<string[]>(() => {
+		const savedFavorites = localStorage.getItem("favorites");
+
+		return savedFavorites ? JSON.parse(savedFavorites) : [];
+	});
 
 	useEffect(() => {
 		let active = true;
@@ -45,8 +54,31 @@ export function RecipesProvider({ children }: RecipesProviderProps) {
 		};
 	}, []);
 
+	useEffect(() => {
+		localStorage.setItem("favorites", JSON.stringify(favorites));
+	}, [favorites]);
+
+	const toggleFavorite = (idMeal: string) => {
+		setFavorites((previousFavorites) =>
+			previousFavorites.includes(idMeal)
+				? previousFavorites.filter((id) => id !== idMeal)
+				: [...previousFavorites, idMeal],
+		);
+	};
+
+	const isFavorite = (idMeal: string) => favorites.includes(idMeal);
+
 	return (
-		<RecipesContext.Provider value={{ recipes, loading, error }}>
+		<RecipesContext.Provider
+			value={{
+				recipes,
+				loading,
+				error,
+				favorites,
+				toggleFavorite,
+				isFavorite,
+			}}
+		>
 			{children}
 		</RecipesContext.Provider>
 	);
