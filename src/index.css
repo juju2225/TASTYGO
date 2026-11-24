@@ -1,4 +1,18 @@
+html,
+body,
+#root {
+	min-height: 100%;
+	margin: 0;
+}
+
 body {
+	background-color: #ffeedd;
 	font-family: "Poppins", sans-serif;
 	color: #000;
+}
+
+#root {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
 }

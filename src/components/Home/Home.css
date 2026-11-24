@@ -1,0 +1,70 @@
+.home-title {
+	text-align: center;
+	color: #523249;
+	font-family: "Poppins", sans-serif;
+	font-size: clamp(2rem, 4vw, 3.5rem);
+	font-weight: 800;
+	line-height: 1.2;
+	letter-spacing: 0.03em;
+	text-shadow: 2px 3px 5px rgba(82, 50, 73, 0.25);
+	margin: 2rem auto 2.5rem;
+	padding: 0 1rem;
+}
+
+.featured-all-button {
+	display: block;
+	width: fit-content;
+	max-width: calc(100% - 2rem);
+	margin: 2rem auto 3rem;
+	padding: 0.75rem 2rem;
+	background-color: #b83d2b;
+	border: 1px solid #b83d2b;
+	border-radius: 8px;
+	color: #ffeedd;
+	font-family: "Poppins", sans-serif;
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.5;
+	text-align: center;
+	text-decoration: none;
+	box-sizing: border-box;
+	box-shadow: 0 4px 8px rgba(82, 50, 73, 0.3);
+	transition:
+		opacity 0.2s ease,
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+.featured-all-button:hover {
+	color: #ffeedd;
+	opacity: 0.8;
+	transform: translateY(-2px);
+	box-shadow: 0 6px 12px rgba(82, 50, 73, 0.4);
+}
+
+.featured-all-button:focus-visible {
+	outline: 2px solid #523249;
+	outline-offset: 3px;
+}
+
+@media (max-width: 1024px) {
+	.featured-all-button {
+		margin-top: 1.75rem;
+	}
+}
+
+@media (max-width: 580px) {
+	.featured-all-button {
+		margin: 1.5rem auto 2.5rem;
+		padding: 0.65rem 1.5rem;
+		font-size: 0.9rem;
+	}
+}
+
+@media (max-width: 380px) {
+	.featured-all-button {
+		margin: 1.25rem auto 2rem;
+		padding: 0.6rem 1.25rem;
+		font-size: 0.85rem;
+	}
+}
