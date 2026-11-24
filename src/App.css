@@ -40,6 +40,19 @@ header {
 	padding: 0 1rem;
 }
 
+.logo-spin {
+	animation: spin-logo 0.8s ease-in-out;
+}
+
+@keyframes spin-logo {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
 @media (min-width: 1201px) and (max-width: 1440px) {
 	.recipe-grid {
 		grid-template-columns: repeat(4, minmax(0, 1fr));

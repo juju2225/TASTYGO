@@ -11,6 +11,8 @@ import desserts from "./data/desserts";
 import allergens from "./data/allergens";
 import Home from "./components/Home/Home";
 import { useRecipes } from "./contexts/RecipesContext";
+import Footer from "./components/footer/Footer";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 function App() {
 	const { recipes, loading, error } = useRecipes();
@@ -158,6 +160,7 @@ function App() {
 		<>
 			<header>
 				<NavBar recipeUser={inputValue} />
+				<ScrollToTop />
 			</header>
 
 			<Routes>
@@ -221,6 +224,9 @@ function App() {
 
 				<Route path="/recipe/:idMeal" element={<RecipeDetails />} />
 			</Routes>
+			<footer>
+				<Footer />
+			</footer>
 		</>
 	);
 }
