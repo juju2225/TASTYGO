@@ -74,7 +74,7 @@ export type Countries = {
 
 export type RecipeCards = {
 	recipe: Recipe;
-	flag:
+	flag?:
 		| {
 				country: string;
 				flag: string;

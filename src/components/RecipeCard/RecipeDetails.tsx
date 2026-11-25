@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router";
 import { getRecipeId } from "../../services/recipeService";
 import type { Recipe } from "../../types/types";
 import countries from "../../data/countries";
+import { useRecipes } from "../../contexts/RecipesContext";
 import "./RecipeDetails.css";
 
 type RecipeItemKey = `strIngredient${number}` | `strMeasure${number}`;
@@ -14,6 +15,8 @@ function RecipeDetails() {
 	const [idRecipe, setIdRecipe] = useState<Recipe | null>(null);
 	const [servings, setServings] = useState(4);
 
+	const { toggleFavorite, isFavorite } = useRecipes();
+
 	useEffect(() => {
 		if (idMeal) {
 			getRecipeId(idMeal).then((data) => {
@@ -21,6 +24,8 @@ function RecipeDetails() {
 			});
 		}
 	}, [idMeal]);
+
+	const favorite = idRecipe ? isFavorite(idRecipe.idMeal) : false;
 
 	const flagDetail = countries.find(
 		(country) => country.country === idRecipe?.strCountry,
@@ -32,6 +37,7 @@ function RecipeDetails() {
 	};
 
 	const ingredients: Ingredient[] = [];
+
 	for (let i = 1; i <= 20; i++) {
 		if (
 			idRecipe?.[`strIngredient${i}` as ValidRecipeItemKey] &&
@@ -45,7 +51,7 @@ function RecipeDetails() {
 	}
 
 	return (
-		<main>
+		<main className="recipe-details">
 			<div className="top-details">
 				<div className="country-details">
 					<span aria-hidden="true">{flagDetail?.flag}</span>
@@ -54,11 +60,25 @@ function RecipeDetails() {
 
 				<button
 					type="button"
-					aria-label={`Add ${idRecipe?.strMeal ?? "recipe"} to favorites`}
+					aria-label={
+						favorite
+							? `Remove ${idRecipe?.strMeal ?? "recipe"} from favorites`
+							: `Add ${idRecipe?.strMeal ?? "recipe"} to favorites`
+					}
+					aria-pressed={favorite}
 					className="favorite-button"
+					disabled={!idRecipe}
+					onClick={() => {
+						if (idRecipe) {
+							toggleFavorite(idRecipe.idMeal);
+						}
+					}}
 				>
-					<i className="bi bi-heart" aria-hidden="true"></i>
-					Favorite
+					<i
+						className={`bi ${favorite ? "bi-heart-fill" : "bi-heart"}`}
+						aria-hidden="true"
+					/>
+					{favorite ? "Favorited" : "Favorite"}
 				</button>
 
 				<button type="button" onClick={() => window.print()}>
