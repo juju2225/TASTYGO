@@ -14,6 +14,7 @@ import { useRecipes } from "./contexts/RecipesContext";
 import Footer from "./components/footer/Footer";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import Favorites from "./components/Favorites/Favorites";
+import Discover from "./components/Discover/Discover";
 
 function App() {
 	const { recipes, loading, error } = useRecipes();
@@ -217,7 +218,7 @@ function App() {
 					}
 				/>
 
-				<Route path="/discover" element={<h1>Hello from discover</h1>} />
+				<Route path="/discover" element={<Discover />} />
 
 				<Route path="/favorites" element={<Favorites />} />
 
