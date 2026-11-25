@@ -14,7 +14,7 @@ function Discover() {
 	const [exitDirection, setExitDirection] = useState<-1 | 1 | null>(null);
 	const [showSwipeHint, setShowSwipeHint] = useState(true);
 	const [announcement, setAnnouncement] = useState(
-		"Utilisez les flèches gauche et droite, les boutons ou le glissement pour découvrir les recettes.",
+		"Utilisez les boutons ou le glissement pour découvrir les recettes.",
 	);
 
 	const startX = useRef<number | null>(null);
@@ -99,19 +99,18 @@ function Discover() {
 		advanceRecipe(addToFavorites);
 	}
 
-	function handlePointerDown(event: React.PointerEvent<HTMLElement>) {
+	function handlePointerDown(event: React.PointerEvent<HTMLDivElement>) {
 		if ((event.target as HTMLElement).closest("a, button")) {
 			return;
 		}
 
 		setShowSwipeHint(false);
-
 		startX.current = event.clientX;
 		setIsDragging(true);
 		event.currentTarget.setPointerCapture(event.pointerId);
 	}
 
-	function handlePointerMove(event: React.PointerEvent<HTMLElement>) {
+	function handlePointerMove(event: React.PointerEvent<HTMLDivElement>) {
 		if (startX.current === null) {
 			return;
 		}
@@ -119,7 +118,7 @@ function Discover() {
 		setDragX(event.clientX - startX.current);
 	}
 
-	function handlePointerUp(event: React.PointerEvent<HTMLElement>) {
+	function handlePointerUp(event: React.PointerEvent<HTMLDivElement>) {
 		if (startX.current === null) {
 			return;
 		}
@@ -129,8 +128,9 @@ function Discover() {
 		startX.current = null;
 		setIsDragging(false);
 
-		if (difference > 80) {
-			setExitDirection(1);
+		if (difference > 80 || difference < -80) {
+			const direction = difference > 80 ? 1 : -1;
+			setExitDirection(direction);
 
 			const prefersReducedMotion = window.matchMedia(
 				"(prefers-reduced-motion: reduce)",
@@ -138,22 +138,7 @@ function Discover() {
 
 			window.setTimeout(
 				() => {
-					advanceRecipe(true);
-					setDragX(0);
-					setExitDirection(null);
-				},
-				prefersReducedMotion ? 0 : 250,
-			);
-		} else if (difference < -80) {
-			setExitDirection(-1);
-
-			const prefersReducedMotion = window.matchMedia(
-				"(prefers-reduced-motion: reduce)",
-			).matches;
-
-			window.setTimeout(
-				() => {
-					advanceRecipe(false);
+					advanceRecipe(direction === 1);
 					setDragX(0);
 					setExitDirection(null);
 				},
@@ -168,22 +153,6 @@ function Discover() {
 		startX.current = null;
 		setIsDragging(false);
 		setDragX(0);
-	}
-
-	function handleKeyDown(event: React.KeyboardEvent<HTMLElement>) {
-		if ((event.target as HTMLElement).closest("a, button") || event.repeat) {
-			return;
-		}
-
-		if (event.key === "ArrowRight") {
-			event.preventDefault();
-			handleChoice(true);
-		}
-
-		if (event.key === "ArrowLeft") {
-			event.preventDefault();
-			handleChoice(false);
-		}
 	}
 
 	useEffect(() => {
@@ -250,7 +219,7 @@ function Discover() {
 						</div>
 					)}
 
-					<article
+					<div
 						className={`card discover-card ${
 							isDragging ? "is-dragging" : ""
 						} ${showSwipeHint ? "show-swipe-demo" : ""}`}
@@ -258,10 +227,6 @@ function Discover() {
 						onPointerMove={handlePointerMove}
 						onPointerUp={handlePointerUp}
 						onPointerCancel={handlePointerCancel}
-						onKeyDown={handleKeyDown}
-						tabIndex={0}
-						aria-labelledby="discover-recipe-title"
-						aria-describedby="discover-keyboard-help"
 						style={{
 							transform: cardTransform,
 							transition: isDragging
@@ -298,7 +263,7 @@ function Discover() {
 						/>
 
 						<div className="discover-card-content">
-							<h2 id="discover-recipe-title">{currentRecipe.strMeal}</h2>
+							<h2>{currentRecipe.strMeal}</h2>
 
 							<Link
 								to={`/recipe/${currentRecipe.idMeal}`}
@@ -307,12 +272,7 @@ function Discover() {
 								Recipe 🔪
 							</Link>
 						</div>
-					</article>
-
-					<p id="discover-keyboard-help" className="visually-hidden">
-						On the card, press the right arrow to add this recipe to your
-						favorites, or the left arrow to skip to the next one.
-					</p>
+					</div>
 
 					<div className="discover-actions">
 						<button

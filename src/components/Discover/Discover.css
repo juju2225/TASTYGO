@@ -240,7 +240,7 @@
 .discover-swipe-arrow-right,
 .discover-swipe-arrow-left {
 	position: absolute;
-	top: 50%;
+	top: 30%;
 	left: 50%;
 	font-size: 3rem;
 	font-weight: 800;
@@ -487,11 +487,11 @@
 	}
 
 	.discover-swipe-heart {
-		left: calc(100% + 15px);
+		left: calc(100% + 35px);
 	}
 
 	.discover-swipe-cross {
-		right: calc(100% + 15px);
+		right: calc(100% + 35px);
 	}
 
 	.discover-actions {
@@ -539,11 +539,11 @@
 	}
 
 	.discover-swipe-heart {
-		left: calc(100% + 10px);
+		left: calc(100% + 35px);
 	}
 
 	.discover-swipe-cross {
-		right: calc(100% + 10px);
+		right: calc(100% + 35px);
 	}
 
 	.discover-actions {
